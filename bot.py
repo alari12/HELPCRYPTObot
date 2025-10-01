@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 # Environment variables (✅ DO NOT put your token here)
 TOKEN = os.environ.get("TELEGRAM_TOKEN")
-HELP_LINK = os.environ.get"HELP_LINK", "https://alari12.github.io/MindCarePLC/"
+HELP_LINK = os.environ.get("HELP_LINK", "https://alari12.github.io/MindCarePLC/")
 TRIGGERS = os.environ.get("TRIGGERS", "wallet,usdt,crypto,sol,help")
 TRIGGER_WORDS = [t.strip().lower() for t in TRIGGERS.split(",") if t.strip()]
 
