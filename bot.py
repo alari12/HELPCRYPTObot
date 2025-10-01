@@ -18,8 +18,8 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-TOKEN = os.environ.get("8256075938:AAGelvhEM-0DnLCiGeJld49jc_8NWD3bTDU")
-HELP_LINK = os.environ.get("HELP_LINK", "https://alari12.github.io/MindCarePLC/")
+TOKEN = os.environ.get"8256075938:AAGelvhEM-0DnLCiGeJld49jc_8NWD3bTDU"
+HELP_LINK = os.environ.get"HELP_LINK", "https://alari12.github.io/MindCarePLC/"
 TRIGGERS = os.environ.get("TRIGGERS", "wallet,usdt,crypto,sol,help")
 TRIGGER_WORDS = [t.strip().lower() for t in TRIGGERS.split(",") if t.strip()]
 
